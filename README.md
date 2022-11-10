@@ -5,6 +5,6 @@ Programa suskaičiuoja studento galutį pažymį ir išveda pažymių medianą.
 
 Programa leidžia pasirinkti:
 
-1.Kad studentų namų darbų pažymiai būtų suvesti ranka arba, kad jie būtų sugeneruoti automatiškai; 
+1.Kad studentų namų darbų pažymiai būtų suvesti ranka arba, kad jie būtų sugeneruoti automatiškai;\n 
 2.Studentų skaičių;
 3.Kiekvieno studento pažymių skaičių.
