@@ -120,15 +120,6 @@ void mediana(std::vector<int> paz)
 
 void vidurkis(Duomenys studentas[], int i)
 {
-    int counter = 0;
-    for (int x = 0; x < studentas[i].paz.size(); x++)
-        if (studentas[i].paz[counter] != 0) {
-            counter++;
-        }
-        else {
-            studentas[i].paz[counter] = 0;
-        }
-
     studentas[i].galut = std::accumulate(studentas[i].paz.begin(),
         studentas[i].paz.end(), decltype(studentas[i].paz)::value_type(0));
 
