@@ -25,8 +25,6 @@ void ivedimas_ranka(Duomenys studentas[], int paz_sk);
 
 bool has_digit(std::string s);
 
-bool has_letter(int s);
-
 void vardas(Duomenys studentas[], int i);
 
 void rezultatai(std::vector<Duomenys> studentas, int studentu_sk);
