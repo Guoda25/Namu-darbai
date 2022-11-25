@@ -59,7 +59,7 @@ int main()
             std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
             std::cin >> paz_sk;
             ivedimas_ranka(studentas, tryCatch(paz_sk));
-            vidurkis(studentas, i);
+            vidurkis(studentas, 0);
             studentai.push_back(studentas[0]);
         }
         //rezultatai(studentai);
