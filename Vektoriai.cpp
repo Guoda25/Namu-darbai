@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <numeric>
 #include<algorithm>
+#include <ctype.h>
 
 
 
@@ -18,15 +19,17 @@ void mediana(std::vector<int> paz);
 
 void vidurkis(Duomenys studentas[], int i);
 
-void ivedimas_automatiskai(Duomenys studentas[], int i, int a);
+void ivedimas_automatiskai(Duomenys studentas[], int a);
 
-void ivedimas_ranka(Duomenys studentas[], int i, int paz_sk);
+void ivedimas_ranka(Duomenys studentas[], int paz_sk);
 
 bool has_digit(std::string s);
 
+bool has_letter(int s);
+
 void vardas(Duomenys studentas[], int i);
 
-void rezultatai(Duomenys studentas[], int studentu_sk);
+void rezultatai(std::vector<Duomenys> studentas, int studentu_sk);
 
 
 int main()
@@ -34,6 +37,8 @@ int main()
     int paz_sk;
     int studentu_sk;
     char temp;
+    Duomenys studentas[1];
+    std::vector<Duomenys> studentai;
 
     do
     {
@@ -41,7 +46,6 @@ int main()
         std::cin >> temp;
         if (temp != 'a' && temp != 'A' && temp != 'r' && temp != 'R') { std::cout << "pakartokite, netinkamas simbolis\n"; }
     } while (temp != 'a' && temp != 'A' && temp != 'r' && temp != 'R');
-    Duomenys stud[100]{};
 
     do
     {
@@ -49,20 +53,21 @@ int main()
         std::cin >> studentu_sk;
     } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
 
-
-
+    
     switch (temp) {
     case 'a':
     case 'A':
        
         for (int i = 0; i < studentu_sk; i++)
         {
-
-            vardas(stud, i);
+            
+            vardas(studentas, i);
             std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
             std::cin >> paz_sk;
-            ivedimas_automatiskai(stud, i, paz_sk);
-            vidurkis(stud, i);
+            ivedimas_automatiskai(studentas, paz_sk);
+            vidurkis(studentas, 0);
+            studentai.push_back(studentas[0]);
+           
         }
 
         break;
@@ -72,17 +77,18 @@ int main()
 
         for (int i = 0; i < studentu_sk; i++)
         {
-            vardas(stud, i);
+            vardas(studentas, i);
             std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
             std::cin >> paz_sk;
-            ivedimas_ranka(stud, i, paz_sk);
-            vidurkis(stud, i);
+            ivedimas_ranka(studentas, paz_sk);
+            vidurkis(studentas, 0);
+            studentai.push_back(studentas[0]);
         }
 
         break;
 
     }
-    rezultatai(stud, studentu_sk);
+    rezultatai(studentai, studentu_sk);
 
     system("pause>0");
 
@@ -116,11 +122,11 @@ void vidurkis(Duomenys studentas[], int i)
 {
     int counter = 0;
     for (int x = 0; x < studentas[i].paz.size(); x++)
-        if (studentas[i].paz.at(counter) != 0) {
+        if (studentas[i].paz[counter] != 0) {
             counter++;
         }
         else {
-            studentas[i].paz.at(counter) = 0;
+            studentas[i].paz[counter] = 0;
         }
 
     studentas[i].galut = std::accumulate(studentas[i].paz.begin(),
@@ -131,34 +137,37 @@ void vidurkis(Duomenys studentas[], int i)
 }   
 
 
-void ivedimas_automatiskai(Duomenys studentas[], int i, int a)
+void ivedimas_automatiskai(Duomenys studentas[], int a)
 {   
+    studentas[0].paz.clear();
+    int x = 0;
     srand(time(0));
-    studentas[i].egz = rand() % 10 + 1;
-    for (int x = 0; x < a; x++);
-    do
-    {
-        studentas[i].paz.push_back(rand() % 10 + 1);
-    } while (studentas[i].paz.size() < a);
+    studentas[0].egz = rand() % 10 + 1;
+    do{
+       
+        studentas[0].paz.push_back(rand() % 10 + 1);
+        x++;
+
+    } while (x < a);
 }
 
 
-void ivedimas_ranka(Duomenys studentas[], int i, int paz_sk)
+void ivedimas_ranka(Duomenys studentas[], int paz_sk)
 {
+    studentas[0].paz.clear();
     int temp;
-
     for (int a = 0; a < paz_sk; a++) {
 
         std::cout << "Iveskite studento " << a + 1 << "-aji pazymi: ";
         std::cin >> temp;
-        studentas[i].paz.push_back(temp);
+        studentas[0].paz.push_back(temp);
 
     }
 
     do {
-        std::cout << "Iveskite egzamino pazymi:\n";
-        std::cin >> studentas[i].egz;
-    } while (studentas[i].egz < 0 || studentas[i].egz > 10);
+        std::cout << "Iveskite egzamino pazymi: ";
+        std::cin >> studentas[0].egz;
+    } while (studentas[0].egz < 0 || studentas[0].egz > 10);
 }
 
 bool has_digit(std::string s)
@@ -166,23 +175,24 @@ bool has_digit(std::string s)
     return (s.find_first_of("0123456789") != std::string::npos);
 }
 
+
 void vardas(Duomenys studentas[], int i)
 {
     do
     {
         std::cout << "Iveskite studento nr. " << i + 1 << " varda:\n";
-        std::cin >> studentas[i].Vard;
-    } while (studentas[i].Vard.length() < 0 || studentas[i].Vard.length() > 25 || has_digit(studentas[i].Vard));
+        std::cin >> studentas[0].Vard;
+    } while (studentas[0].Vard.length() < 0 || studentas[0].Vard.length() > 25 || has_digit(studentas[0].Vard));
     do
     {
         std::cout << "Iveskite studento nr. " << i + 1 << " pavarde:\n";
-        std::cin >> studentas[i].Pav;
-    } while (studentas[i].Pav.length() < 0 && studentas[i].Pav.length() > 25 || has_digit(studentas[i].Pav));
+        std::cin >> studentas[0].Pav;
+    } while (studentas[0].Pav.length() < 0 && studentas[0].Pav.length() > 25 || has_digit(studentas[0].Pav));
     std::cout << std::endl;
 }
 
 
-void rezultatai(Duomenys studentas[], int studentu_sk)
+void rezultatai(std::vector<Duomenys> studentas, int studentu_sk)
 {
     std::cout << "\n\n";
     std::cout << std::setw(20) << std::left << "Vardas"

@@ -37,17 +37,19 @@ int main()
         std::cin >> temp;
         if (temp != 'a' && temp != 'A' && temp != 'r' && temp != 'R') { std::cout << "pakartokite, netinkamas simbolis\n"; }
     } while (temp != 'a' && temp != 'A' && temp != 'r' && temp != 'R');
-    Duomenys stud[100]{};
+    
+    do
+    {
+        std::cout << "Iveskite studentu kieki:\n";
+        std::cin >> studentu_sk;
+    } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
+    
+    Duomenys * stud = new Duomenys[studentu_sk];
+    
     switch (temp) {
     case 'a':
     case 'A':
-        do
-        {
-            std::cout << "Iveskite studentu kieki:\n";
-            std::cin >> studentu_sk;
-        } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
-
-
+       
         for (int i = 0; i < studentu_sk; i++)
         {
 
@@ -62,11 +64,7 @@ int main()
 
     case 'r':
     case 'R':
-        do
-        {
-            std::cout << "Iveskite studentu kieki:\n";
-            std::cin >> studentu_sk;
-        } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
+  
         for (int i = 0; i < studentu_sk; i++)
         {
             vardas(stud, i);
@@ -81,6 +79,8 @@ int main()
     }
 
     rezultatai(stud, studentu_sk);
+    delete[]stud;
+    stud = NULL;
     system("pause>0");
     
 }
