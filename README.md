@@ -11,4 +11,4 @@ Programoje yra 5 cpp failai ir 4 header failai:
 
 **Skaiciavimai.h** - Saugomos funkcijos, kurios paskaičiuoja studentų pažymių vidurkį ir medianą.
 
-**TryCatch.h** - Saugoma _try_catch_ funkcija, kuri patikrina ar vartotojas nepadarė klaidų įvesdamas studentų duomenis (pvz. vesdamas studento pažymius vietoj skaičiaus įrašė raidę arba simbolį).
+**TryCatch.h** - Saugoma _tryCatch_ funkcija, kuri patikrina ar vartotojas nepadarė klaidų įvesdamas studentų duomenis (pvz. vesdamas studento pažymius vietoj skaičiaus įrašė raidę arba simbolį).
