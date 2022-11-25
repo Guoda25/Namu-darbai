@@ -1,6 +1,6 @@
 # V0.1.1
-Pataisyta (versijos V0.1) versija V01.1.
-2 cpp failai: Vektoriai.cpp ir Masyvas.cpp.
+Pataisyta (versijos V0.1) versija **V01.1**.
+2 cpp failai: _Vektoriai.cpp_ ir _Masyvas.cpp_.
 Programa suskaičiuoja studento galutį pažymį ir išveda pažymių medianą.
 
 Programa leidžia pasirinkti:
