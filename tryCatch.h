@@ -1,3 +1,1 @@
-
-
-int tryCatch(int i);
+int tryCatch(std::string s);
