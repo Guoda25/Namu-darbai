@@ -13,9 +13,10 @@ struct Duomenys {
     std::string Vard, Pav;
     std::vector<int> paz = { };
     int egz;
-    float galut = 0;
+    float galut;
+    float median;
 };
 
-float mediana(std::vector<int> paz);
+bool comparePagalPav(const Duomenys& x, const Duomenys& y);
 
-void vidurkis(Duomenys studentas[], int i);
+void vid_median(std::vector<Duomenys>& studentai, int i, int paz_sk);
