@@ -13,40 +13,41 @@
 
 struct Duomenys {
     std::string Vard, Pav;
-    std::vector<int> paz = { };
+    std::vector<int> paz = {};
     int egz;
-    float galut = 0;
+    float galut;
+    float median;
 };
 
 
-float mediana(std::vector<int> paz)
-{
-    std::sort(paz.begin(), paz.end(), [](int& a, int& b) { return a > b; });
-    int counter = 0;
-    for (int i = 0; i < paz.size(); i++)
-    {
-            counter++;
-    }
 
-    if (counter % 2 == 0)
+bool comparePagalPav(const Duomenys& x, const Duomenys& y) {
+    if (x.Pav.length() == y.Pav.length())
+        return x.Pav < y.Pav;
+    else
+        return x.Pav.length() < y.Pav.length();
+}
+
+void vid_median(std::vector<Duomenys>& studentai, int i, int paz_sk)
+{
+
+    //suskaiciuoja studento galutini bala:
+
+    studentai[i].galut = accumulate(studentai[i].paz.begin(), studentai[i].paz.end(), decltype(studentai[i].paz)::value_type(0)) / float(paz_sk);
+    studentai[i].galut = round((studentai[i].galut * 0.4 + 0.6 * studentai[i].egz) * 100) / 100;
+
+
+    //surusiuoja studento namu darbu pazymius ir randa mediana
+
+    sort(studentai[i].paz.begin(), studentai[i].paz.end(), [](int& a, int& b) { return a > b; });
+    if (paz_sk % 2 == 0)
     {
-        return round(float(((paz[(counter / 2) - 1]) + (paz[(counter / 2)])) / 2.0)*100) / 100;
+        studentai[i].median = float((studentai[i].paz.at((paz_sk / 2) - 1) + studentai[i].paz.at((paz_sk / 2))) / 2.0);
     }
     else
     {
-        return round((paz[(counter / 2)])*100) / 100;
+        studentai[i].median = float(studentai[i].paz.at(paz_sk / 2));
     }
-
-}
-
-void vidurkis(Duomenys studentas[], int i)
-{
-
-    studentas[i].galut = std::accumulate(studentas[i].paz.begin(),
-        studentas[i].paz.end(), decltype(studentas[i].paz)::value_type(0));
-
-    studentas[i].galut = studentas[i].galut / studentas[i].paz.size();
-    studentas[i].galut = round((studentas[i].galut * 0.4 + 0.6 * studentas[i].egz)*100)/100;
 
 }
 
