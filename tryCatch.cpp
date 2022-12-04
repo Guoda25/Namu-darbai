@@ -1,22 +1,22 @@
 #include "FailoNuskaitymas.h"
 
 
-int tryCatch(int i) {
+int tryCatch(std::string s) {
 
-    do {
-        try {
-            if (std::cin.fail())
-                throw "Ivedete neteisnga simboli\n";
 
+    try {
+        if (s.find_first_of("0123456789,./;'[]-= ") != std::string::npos) {
+
+            throw "Ivedete neteisnga simboli\n";
         }
-        catch (const char* txtException) {
-            std::cout << txtException;
-            std::cin.clear();
-            std::cin.ignore();
-            std::cout << "Iveskite pazymiu skaiciu dar karta: ";
-            std::cin >> i;
-        }
-    } while (std::cin.fail());
+        else
+            return true;
 
-    return i;
+    }
+    catch (const char* txtException) {
+        std::cout << txtException;
+        std::cin.clear();
+        std::cin.ignore();
+        return false;
+    }
 };
