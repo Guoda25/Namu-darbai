@@ -1,33 +1,31 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <iomanip>
 #include <numeric>
-#include<algorithm>
-#include <ctype.h>
-
-
+#include <algorithm>
 
 struct Duomenys {
     std::string Vard, Pav;
     std::vector<int> paz = {};
     int egz;
     float galut;
+    float median;
 };
 
-void mediana(std::vector<int> paz);
+void vid_median(std::vector<Duomenys>& studentai, int i, int paz_sk);
 
-void vidurkis(Duomenys studentas[], int i);
+void ivedimas_automatiskai(std::vector<Duomenys>& studentai, int i);
 
-void ivedimas_automatiskai(Duomenys studentas[], int a);
-
-void ivedimas_ranka(Duomenys studentas[], int paz_sk);
+void ivedimas_ranka(std::vector<Duomenys>& studentai, int i);
 
 bool has_digit(std::string s);
 
-void vardas(Duomenys studentas[], int i);
+bool comparePagalPav(const Duomenys& x, const Duomenys& y);
 
-void rezultatai(std::vector<Duomenys> studentas, int studentu_sk);
+void vardas(std::vector<Duomenys>& studentai, int i);
+
+void rezultatai(std::vector<Duomenys>& studentai);
 
 
 int main()
@@ -35,7 +33,6 @@ int main()
     int paz_sk;
     int studentu_sk;
     char temp;
-    Duomenys studentas[1];
     std::vector<Duomenys> studentai;
 
     do
@@ -47,25 +44,22 @@ int main()
 
     do
     {
-        std::cout << "Iveskite studentu kieki:\n";
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "Iveskite studentu skaiciu:\n";
         std::cin >> studentu_sk;
-    } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
+    } while (studentu_sk < 0 || studentu_sk > 256 || std::cin.fail());
 
+    studentai.resize(studentai.size() + studentu_sk);
     
     switch (temp) {
     case 'a':
     case 'A':
        
+
         for (int i = 0; i < studentu_sk; i++)
         {
-            
-            vardas(studentas, i);
-            std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
-            std::cin >> paz_sk;
-            ivedimas_automatiskai(studentas, paz_sk);
-            vidurkis(studentas, 0);
-            studentai.push_back(studentas[0]);
-           
+            ivedimas_automatiskai(studentai, i);
         }
 
         break;
@@ -73,130 +67,185 @@ int main()
     case 'r':
     case 'R':
 
+
         for (int i = 0; i < studentu_sk; i++)
         {
-            vardas(studentas, i);
-            std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
-            std::cin >> paz_sk;
-            ivedimas_ranka(studentas, paz_sk);
-            vidurkis(studentas, 0);
-            studentai.push_back(studentas[0]);
+            ivedimas_ranka(studentai, i);
         }
 
         break;
 
     }
-    rezultatai(studentai, studentu_sk);
+
+    rezultatai(studentai);
 
     system("pause>0");
 
 }
 
 
-void mediana(std::vector<int> paz)
+void vid_median(std::vector<Duomenys>& studentai, int i, int paz_sk)
 {
-    std::sort(paz.begin(), paz.end(), [](int& a, int& b) { return a > b; });
-    int counter = 0;
-    for (int i = 0; i < paz.size(); i++){
-            
-        counter++;   
-    }
 
-    if (counter % 2 == 0)
+    //suskaiciuoja studento galutini bala:
+
+    studentai[i].galut = accumulate(studentai[i].paz.begin(), studentai[i].paz.end(), decltype(studentai[i].paz)::value_type(0)) / float(paz_sk);
+    studentai[i].galut = round((studentai[i].galut * 0.4 + 0.6 * studentai[i].egz) * 100) / 100;
+
+
+    //surusiuoja studento namu darbu pazymius ir randa mediana
+
+    sort(studentai[i].paz.begin(), studentai[i].paz.end(), [](int& a, int& b) { return a > b; });
+    if (paz_sk % 2 == 0)
     {
-        std::cout << round(float(((paz[(counter / 2) - 1]) + (paz[(counter / 2)])) / 2.0) * 100) / 100;
+        studentai[i].median = float((studentai[i].paz.at((paz_sk / 2) - 1) + studentai[i].paz.at((paz_sk / 2))) / 2.0);
     }
     else
     {
-        std::cout << round((paz[(counter / 2)]) * 100) / 100;
+        studentai[i].median = float(studentai[i].paz.at(paz_sk / 2));
     }
-    std::cout << std::endl;
-   
-    //for (int a=0; a< paz.size(); a++){std::cout << paz[a];}
-    //std::cout << std::endl;
+
 }
 
-void vidurkis(Duomenys studentas[], int i)
-{
-    studentas[i].galut = std::accumulate(studentas[i].paz.begin(),
-        studentas[i].paz.end(), decltype(studentas[i].paz)::value_type(0));
 
-    studentas[i].galut = studentas[i].galut / counter;
-    studentas[i].galut = round((studentas[i].galut * 0.4 + 0.6 * studentas[i].egz) * 100) / 100;
-}   
-
-
-void ivedimas_automatiskai(Duomenys studentas[], int a)
+void ivedimas_automatiskai(std::vector<Duomenys>& studentas, int i)
 {   
-    studentas[0].paz.clear();
-    int x = 0;
-    srand(time(0));
-    studentas[0].egz = rand() % 10 + 1;
-    do{
-       
-        studentas[0].paz.push_back(rand() % 10 + 1);
-        x++;
+    int temp;
+    vardas(studentas, i);
 
-    } while (x < a);
+    do {
+
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
+        std::cin >> temp;
+        std::cout << std::endl;
+
+    } while (std::cin.fail());
+
+    srand(time(0));
+    studentas[i].egz = rand() % 10 + 1;
+
+    do
+    {
+        studentas[i].paz.push_back(rand() % 10 + 1);
+    } while (studentas[i].paz.size() < temp);
+
+    vid_median(studentas, i, temp);
 }
 
 
-void ivedimas_ranka(Duomenys studentas[], int paz_sk)
+void ivedimas_ranka(std::vector<Duomenys>& studentas, int i)
 {
-    studentas[0].paz.clear();
-    int temp;
-    for (int a = 0; a < paz_sk; a++) {
+    int temp, temp2;
+    vardas(studentas, i);
 
-        std::cout << "Iveskite studento " << a + 1 << "-aji pazymi: ";
+    do {
+
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "Iveskite " << i + 1 << "-ojo studento pazymiu skaiciu: ";
         std::cin >> temp;
-        studentas[0].paz.push_back(temp);
+        std::cout << std::endl;
+
+    } while (std::cin.fail());
+
+    for (int a = 0; a < temp; a++) {
+
+        do {
+            std::cin.clear();
+            std::cin.ignore();
+            std::cout << "Iveskite studento " << a + 1 << "-aji pazymi: ";
+            std::cin >> temp2;
+        } while (temp2 < 0 || temp2 > 10 || std::cin.fail());
+        studentas[i].paz.push_back(temp2);
 
     }
 
     do {
-        std::cout << "Iveskite egzamino pazymi: ";
-        std::cin >> studentas[0].egz;
-    } while (studentas[0].egz < 0 || studentas[0].egz > 10);
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "Iveskite egzamino pazymi:\n";
+        std::cin >> studentas[i].egz;
+    } while (studentas[i].egz < 0 || studentas[i].egz > 10 || std::cin.fail());
+
+    vid_median(studentas, i, temp);
+
 }
 
 bool has_digit(std::string s)
 {
-    return (s.find_first_of("0123456789") != std::string::npos);
+    return (s.find_first_of("0123456789,./;''[]-*") != std::string::npos);
 }
 
 
-void vardas(Duomenys studentas[], int i)
+void vardas(std::vector<Duomenys>& studentai, int i)
 {
     do
     {
         std::cout << "Iveskite studento nr. " << i + 1 << " varda:\n";
-        std::cin >> studentas[0].Vard;
-    } while (studentas[0].Vard.length() < 0 || studentas[0].Vard.length() > 25 || has_digit(studentas[0].Vard));
+        std::cin >> studentai[i].Vard;
+    } while (studentai[i].Vard.length() < 0 || studentai[i].Vard.length() > 25 || has_digit(studentai[i].Vard));
     do
     {
         std::cout << "Iveskite studento nr. " << i + 1 << " pavarde:\n";
-        std::cin >> studentas[0].Pav;
-    } while (studentas[0].Pav.length() < 0 && studentas[0].Pav.length() > 25 || has_digit(studentas[0].Pav));
+        std::cin >> studentai[i].Pav;
+    } while (studentai[i].Pav.length() < 0 && studentai[i].Pav.length() > 25 || has_digit(studentai[i].Pav));
     std::cout << std::endl;
 }
 
 
-void rezultatai(std::vector<Duomenys> studentas, int studentu_sk)
+void rezultatai(std::vector<Duomenys>& studentai)
 {
-    std::cout << "\n\n";
-    std::cout << std::setw(20) << std::left << "Vardas"
-        << std::setw(20) << std::left << "Pavarde"
-        << std::setw(18) << std::left << "Galutinis(vid.)/"
-        << std::left << "Galutinis(med.)\n"
-        << "--------------------------------------------------------------------------\n";
-    for (int i = 0; i < studentu_sk; i++)
-    {
-        std::cout << std::setw(20) << std::left << studentas[i].Vard
-            << std::setw(20) << std::left << studentas[i].Pav
-            << std::setw(18) << std::left << studentas[i].galut;
-            mediana(studentas[i].paz);
+    sort(studentai.begin(), studentai.end(), comparePagalPav);
+    char temp;
+    do {
+        std::cout << "Jeigu norite, kad studentu galutinis balas butu ju namu darbu mediana iveskite \"M\"\n"
+            << "Jeigu norite, kad studentu galutinis balas butu paskaiciuotas pagal formule iveskite \"F\"\n";
+        std::cin >> temp;
+    } while (temp != 'm' && temp != 'M' && temp != 'f' && temp != 'F');
+
+    switch (temp) {
+    case'm':
+    case'M':
+        std::cout << "\n\n";
+        std::cout << std::setw(20) << std::left << "Vardas"
+            << std::setw(20) << std::left << "Pavarde"
+            << "Galutinis(med.)\n"
+            << "-------------------------------------------------------\n";
+        for (int i = 0; i < studentai.size(); i++)
+        {
+            std::cout << std::setw(20) << std::left << studentai[i].Vard
+                << std::setw(20) << std::left << studentai[i].Pav
+                << std::setw(18) << std::left << studentai[i].median << std::endl;
+
+        }
+
+        std::cout << "\n\n";
+
+        break;
+    case 'f':
+    case 'F':
+
+        std::cout << "\n\n";
+        std::cout << std::setw(20) << std::left << "Vardas"
+            << std::setw(20) << std::left << "Pavarde"
+            << "Galutinis(vid.)\n"
+            << "-------------------------------------------------------\n";
+        for (int i = 0; i < studentai.size(); i++)
+        {
+            std::cout << std::setw(20) << std::left << studentai[i].Vard
+                << std::setw(20) << std::left << studentai[i].Pav
+                << std::setw(18) << std::left << studentai[i].galut << std::endl;
+
+        }
+
+        std::cout << "\n\n";
 
     }
+}
 
-    std::cout << "\n\n";
+bool comparePagalPav(const Duomenys& x, const Duomenys& y) {
+        return x.Pav < y.Pav;
+
 }
