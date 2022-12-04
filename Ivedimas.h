@@ -1,13 +1,11 @@
 #include "Skaiciavimai.h"
+#include "tryCatch.h"
 
+void vardas(std::vector<Duomenys>& studentas, int i);
 
-void ivedimas_automatiskai(Duomenys studentas[], int a);
+void ivedimas_automatiskai(std::vector<Duomenys>& studentas, int i);
 
-void ivedimas_ranka(Duomenys studentas[], int paz_sk);
-
-bool has_digit(std::string s);
-
-void vardas(Duomenys studentas[], int i);
+void ivedimas_ranka(std::vector<Duomenys>& studentas, int i);
 
 void rezultatai(std::vector<Duomenys> studentas);
 
