@@ -4,7 +4,6 @@
 #include <numeric>
 #include<algorithm>
 
-
 struct Duomenys {
     std::string Vard, Pav;
     int paz[50] = {0};
