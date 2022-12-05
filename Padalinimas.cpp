@@ -17,8 +17,5 @@ void studentu_isskaidymas(vector<Duomenys>& studentai, vector<Duomenys>& vargsiu
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> diff = end - start;
     cout << "Studentu padalijimo i dvi grupes laikas: " << diff.count() << endl;
-
-    sort(vargsiukai.begin(), vargsiukai.end(), comparePagalPav);
-    sort(kietiakai.begin(), kietiakai.end(), comparePagalPav);
 }
 
