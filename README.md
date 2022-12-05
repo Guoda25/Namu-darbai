@@ -13,6 +13,6 @@ Programa leidžia pasirinkti:
 
 4. Kad studentų galutinis balas būtų jų namų darbų pažymių mediana arba, kad galutinis balas būtų suskaičiuotas pagal formulę.
 
-formulė naudojama galutiniui balui suskaičiuoti:
+Formulė naudojama galutiniui balui suskaičiuoti:
 
 <img src="https://latex.codecogs.com/svg.image?galutinis&space;=&space;egzaminas&space;*&space;0,6&space;&plus;&space;\frac{\sum_{i=1}^{n}&space;nd_i}{n}&space;*&space;0,4" title="https://latex.codecogs.com/svg.image?galutinis = egzaminas * 0,6 + \frac{\sum_{i=1}^{n} nd_i}{n} * 0,4" />
