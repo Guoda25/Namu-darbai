@@ -3,7 +3,7 @@ V0.1.1 patobulinimas.
 
 Programą papildo funkcija, kuri leidžia duomenis apie studentus nuskaityti iš tekstinio failo bei visų studentų rezultatus išveda į nauja tekstinį failą _"kursiokai.txt"_.
 
-Programoje yra 5 cpp failai ir 4 header failai:
+Programoje yra 4 cpp failai ir 3 header failai:
 
 **1. FailoNuskaitymas.h**
 
@@ -30,6 +30,14 @@ _comparePagalPav()_ - palygina studentų pavardes ir grąžina mažesnę reikšm
 _vid_median()_ - suskaičiuoja studentų galutinį pažymį pagal formulę ir randa namų darbų pažymių medianą;
 
 
-**4. TryCatch.h** 
-
-_tryCatch()_ - Patikrina ar vartotojas nepadarė klaidų įvesdamas studentų duomenis (pvz. vesdamas studento vardą vietoj raidės įrašė skaičių arba simbolį).
+**_Try Catch_ funkcijos realizacija programoje:** 
+```C++
+try {
+        if (!myFile)
+            throw "NEPAVYKO ATIDARYTI FAILO!\n";
+    }
+    catch (const char* txtException) {
+        cout << txtException;
+        exit(1);
+    }
+```
