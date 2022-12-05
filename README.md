@@ -8,6 +8,8 @@ Patobulinta V0.2 versija, papildomai leidžia pasirinkti, kad studentų duomenis
 
 3. Studentų išvedimo į naujus failus pagal kategoriją laiką.
 
+Nuo šios versijos programoje yra naudojama `using namespace std`.
+
 Papildomos funkcijos ir jų header failai:
 
 **1. FailoGeneravimas.h**
