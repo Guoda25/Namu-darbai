@@ -33,7 +33,7 @@ _vid_median()_ - suskaičiuoja studentų galutinį pažymį pagal formulę ir ra
 
 _tryCatch()_ - Patikrina ar vartotojas nepadarė klaidų įvesdamas studentų duomenis (pvz. vesdamas studento vardą vietoj raidės įrašė skaičių arba simbolį).
 
-**_Try Catch_ funkcijos realizacija programoje:** 
+**Dar viena _Try Catch_ funkcijos realizacija programoje:** 
 ```C++
 try {
         if (!myFile)
