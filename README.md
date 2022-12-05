@@ -31,5 +31,6 @@ _rezultatai_varg_kiet()_ - išveda jau į dvi kategorijas (vargšiukai ir kietia
 _studentu_isskaidymas()_ - funkcija patikrina studentų galutinį balą, studentai gavę mažiau nei 5.00 keliauja į vargšiukų kategoriją, likę į kietiakų kategoriją.
 
 # V0.3 gauti rezultatai
-![rezultatai_vector](https://user-images.githubusercontent.com/112932535/205509342-62f1e6ca-a877-4953-a6f5-3b96814d5e19.PNG)
 
+
+![rezultatai_vector](https://user-images.githubusercontent.com/112932535/205731048-9647087a-fc9c-4fc2-a4da-3f466a0c78a8.PNG)
