@@ -87,7 +87,7 @@ void ivedimas_ranka(vector<Duomenys>& studentas, int i)
     
 }
 
-void rezultatai(std::vector<Duomenys> studentai) //atspausdina rezultatus
+void rezultatai(std::vector<Duomenys> studentai)
 {
     char temp;
     sort(studentai.begin(), studentai.end(), comparePagalPav);
@@ -139,6 +139,7 @@ void rezultatai(std::vector<Duomenys> studentai) //atspausdina rezultatus
 
 void rezultatau_isvedimas_iFaila(vector<Duomenys> studentai)
 {
+    sort(studentai.begin(), studentai.end(), comparePagalPav);
     ofstream output;
     output.open("kursiokai.txt");
     output << setw(20) << left << "Vardas"
@@ -161,6 +162,8 @@ void rezultatau_isvedimas_iFaila(vector<Duomenys> studentai)
 
 void rezultatai_varg_kiet(vector<Duomenys> vargsiukai, vector<Duomenys> kietiakai) {
 
+    sort(vargsiukai.begin(), vargsiukai.end(), comparePagalPav);
+    sort(kietiakai.begin(), kietiakai.end(), comparePagalPav);
     auto start = chrono::high_resolution_clock::now();
     ofstream output;
     output.open("vargsiukai.txt");
