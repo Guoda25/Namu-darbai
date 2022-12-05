@@ -39,7 +39,7 @@ try {
         if (!myFile)
             throw "NEPAVYKO ATIDARYTI FAILO!\n";
     }
-    catch (const char* txtException) {
+catch (const char* txtException) {
         cout << txtException;
         exit(1);
     }
