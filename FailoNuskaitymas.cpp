@@ -4,13 +4,19 @@
 void failo_nuskaitymas(std::vector<Duomenys>& studentai, int* pazymiu_sk)
 {
     const char* path = "C:/Users/Guoda/Desktop/studentai10000.txt.txt";
+    Duomenys studentas;
+    studentai.push_back(studentas);
     int i = 0;
     int temp;
-    std::ifstream myFile;
-    std::string line;
+    ifstream myFile;
+    string line;
     myFile.open(path);
-    if (!myFile) {
-        std::cerr << "NEPAVYKO ATIDARYTI FAILO!" << std::endl;
+    try {
+        if (!myFile)
+            throw "NEPAVYKO ATIDARYTI FAILO!\n";
+    }
+    catch (const char* txtException) {
+        cout << txtException;
         exit(1);
     }
     if (myFile.is_open())
@@ -20,10 +26,11 @@ void failo_nuskaitymas(std::vector<Duomenys>& studentai, int* pazymiu_sk)
 
         while (true)
         {
-
-            studentai.resize(studentai.size() + 1);
+            if (myFile.eof()) {
+                studentai.pop_back();
+                break;
+            }
             myFile >> studentai[i].Vard;
-            if (myFile.eof()) { studentai.pop_back(); break; }
             myFile >> studentai[i].Pav;
             for (int a = 0; a < *pazymiu_sk; a++)
             {
@@ -31,13 +38,12 @@ void failo_nuskaitymas(std::vector<Duomenys>& studentai, int* pazymiu_sk)
                 studentai[i].paz.push_back(temp);
             }
             myFile >> studentai[i].egz;
-
+            studentai.push_back(studentas);
             i++;
-
         }
-
     }
-
+    myFile.close();
+    
     for (int a = 0; a < studentai.size(); a++) {
         vid_median(studentai, a, *pazymiu_sk);
     }
