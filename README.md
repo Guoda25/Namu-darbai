@@ -33,4 +33,5 @@ _studentu_isskaidymas()_ - funkcija patikrina studentų galutinį balą, student
 # V0.3 gauti rezultatai
 
 
-![rezultatai_vector](https://user-images.githubusercontent.com/112932535/205731048-9647087a-fc9c-4fc2-a4da-3f466a0c78a8.PNG)
+![rezultatai_vector1](https://user-images.githubusercontent.com/112932535/206320744-5789ed68-308f-417a-af66-2def5e7c9821.PNG)
+
