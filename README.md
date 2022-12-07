@@ -10,10 +10,11 @@ RAM 8 GB
 SDD 237 GB
 
 # V0.4 gauti rezultatai
-Atlikus programos spartos testą gauti rezultatai parodė, kad, apdorojant failus iš 1000 ir 10000 įrašų, duomenų nuskaitymas bei studentų rūšiavimas į dvi grupes trunka mažiau laiko naudojant _std::list_ tipo konteinerį, tačiau kitais atvejais programa veikia greičiau, kai studentų duomenims saugoti yra naudojamas _std::vector_ tipo konteineris.
+Atlikus programos spartos testą gauti rezultatai parodė, kad, tekstinio failo nuskaitymui konteinerio tipas didėlės įtakos nedaro, kadangi tai užtrunka beveik tiek pat laiko tiek naudojant _std::vector_, tiek _std::list_, tačiau studentų rūšiavimas į dvi grupes trunka kur kas mažiau laiko, jei yra naudojamas _std::vector_ tipo konteineris.
 
 **std::list programos spartos rezultatai:**
-![rezultatai_list](https://user-images.githubusercontent.com/112932535/205741383-6e4f3f85-27e8-49fc-8f2a-2277718c49b4.PNG)
+![rezultatai_list1](https://user-images.githubusercontent.com/112932535/206321207-81fc59d2-eeda-47eb-8f3d-00d423a1adbf.PNG)
+
 
 **std::vector programos spartos rezultatai:**
-![rezultatai_vector](https://user-images.githubusercontent.com/112932535/205744555-e903eb55-e3ee-4091-87c5-8985d4257717.PNG)
+![rezultatai_vector1](https://user-images.githubusercontent.com/112932535/206321235-f2eab2e8-eda3-4abc-850b-fbce6c4e6ece.PNG)
