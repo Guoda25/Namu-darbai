@@ -48,6 +48,7 @@ int main()
             ivedimas_automatiskai(studentai, i);
         }
 
+        rezultatai(studentai);    
         rezultatau_isvedimas_iFaila(studentai);
         break;
 
@@ -59,7 +60,8 @@ int main()
             studentai.push_back(studentas);
             ivedimas_ranka(studentai, i);
         }
-
+            
+        rezultatai(studentai);
         rezultatau_isvedimas_iFaila(studentai);
         break;
 
