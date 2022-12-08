@@ -1,0 +1,10 @@
+ cmake CMakeLists.txt
+ cmake --install .
+ cmake --build .
+ copy src\studentai_1000.txt Debug\studentai_1000.txt
+ copy src\studentai_10000.txt Debug\studentai_10000.txt
+ copy src\studentai_100000.txt Debug\studentai_100000.txt
+ copy src\studentai_1000000.txt Debug\studentai_1000000.txt
+ copy src\studentai_10000000.txt Debug\studentai_10000000.txt
+ copy src\studentai1000000.txt.txt Debug\studentai1000000.txt.txt
+ Debug\V1.0.exe
