@@ -45,7 +45,7 @@ int main()
             ivedimas_automatiskai(studentai, i);
         }
         
-        rezultatau_isvedimas_iFaila(studentai);
+        rezultatai(studentai);
         break;
 
     case 'r':
@@ -57,7 +57,7 @@ int main()
             ivedimas_ranka(studentai, i);
         }
 
-        rezultatau_isvedimas_iFaila(studentai);
+        rezultatai(studentai);
         break;
 
     case 'f':
